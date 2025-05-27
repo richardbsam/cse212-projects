@@ -23,7 +23,7 @@ public static class SetsAndMaps
     {
 
         // TODO Problem 1 - ADD YOUR CODE HERE
-        
+
         var wordSet = new HashSet<string>(words);
         var seen = new HashSet<string>();
         var result = new List<string>();
@@ -53,7 +53,7 @@ public static class SetsAndMaps
     /// have earned that degree.  The degree information is in
     /// the 4th column of the file.  There is no header row in the
     /// file.
-    /// </summary>
+    /// </summary>eDe
     /// <param name="filename">The name of the file to read</param>
     /// <returns>fixed array of divisors</returns>
     public static Dictionary<string, int> SummarizeDegrees(string filename)
@@ -63,11 +63,32 @@ public static class SetsAndMaps
         {
             var fields = line.Split(",");
             // TODO Problem 2 - ADD YOUR CODE HERE
+
+            // Check if line has at least 4 columns
+            if (fields.Length >= 4)
+            {
+                // Get the 4th column (index 3)
+                string degree = fields[3].Trim();
+
+                // Only process non-empty degree values
+                if (!string.IsNullOrEmpty(degree))
+                {
+                    if (degrees.ContainsKey(degree))
+                    {
+                        degrees[degree]++;
+                    }
+                    else
+                    {
+                        degrees[degree] = 1;
+                    }
+                }
+            }
         }
 
         return degrees;
     }
-
+         
+         
     /// <summary>
     /// Determine if 'word1' and 'word2' are anagrams.  An anagram
     /// is when the same letters in a word are re-organized into a 
@@ -87,8 +108,50 @@ public static class SetsAndMaps
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        
+    // Normalize input: remove spaces and convert to lowercase
+        word1 = word1.Replace(" ", "").ToLower();
+        word2 = word2.Replace(" ", "").ToLower();
+
+        // If lengths differ after normalization, they can't be anagrams
+        if (word1.Length != word2.Length)
+            return false;
+
+        // Use dictionaries to count character frequencies
+        Dictionary<char, int> count1 = new Dictionary<char, int>();
+        Dictionary<char, int> count2 = new Dictionary<char, int>();
+
+        // Count characters in word1
+        foreach (char c in word1)
+        {
+            if (count1.ContainsKey(c))
+                count1[c]++;
+            else
+                count1[c] = 1;
+        }
+
+        // Count characters in word2
+        foreach (char c in word2)
+        {
+            if (count2.ContainsKey(c))
+                count2[c]++;
+            else
+                count2[c] = 1;
+        }
+
+        // Compare the two dictionaries
+        if (count1.Count != count2.Count)
+            return false;
+
+        foreach (var kvp in count1)
+        {
+            if (!count2.ContainsKey(kvp.Key) || count2[kvp.Key] != kvp.Value)
+                return false;
+        }
+
+        return true;
     }
+
 
     /// <summary>
     /// This function will read JSON (Javascript Object Notation) data from the 
