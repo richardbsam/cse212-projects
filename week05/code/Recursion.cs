@@ -171,28 +171,6 @@ public static class Recursion
     /// </summary>
 
 
-
-
-
-    //public static void SolveMaze(List<string> results, Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
-    //{
-    // If this is the first time running the function, then we need
-    // to initialize the currPath list.
-    ///if (currPath == null)
-    ///{
-    ///currPath = new List<ValueTuple<int, int>>();
-    ///}
-
-    // currPath.Add((1,2)); // Use this syntax to add to the current path
-
-    // TODO Start Problem 5
-    // ADD CODE HERE
-
-    // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
-    /// }
-    ///}
-
-
     public static void SolveMaze(List<string> results, Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
     {
         // Initialize path list on first call
